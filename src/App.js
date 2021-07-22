@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
 import Sobre from "./pages/Sobre";
 import Categoria from "./pages/Categoria";
@@ -34,6 +34,10 @@ function App() {
             <li>
               <Link to="/kljçlkj">Vai dar erro/PT se clicar aqui</Link>
             </li>
+
+            <li>
+              <Link to="/quem-somos">Quem Somos - [redirecionamento]</Link>
+            </li>
           </ul>
         </nav>
       </header>
@@ -46,6 +50,10 @@ function App() {
 
         <Route exact path="/sobre">
           <Sobre />
+        </Route>
+
+        <Route path="/quem-somos">
+          <Redirect to="/sobre"></Redirect>
         </Route>
 
         <Route path="/categoria/:cat/:id">

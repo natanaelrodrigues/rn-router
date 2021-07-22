@@ -4,7 +4,16 @@ import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
 import Home from "./pages/Home";
 import Sobre from "./pages/Sobre";
 import Categoria from "./pages/Categoria";
+import Login from "./pages/Login";
 import Produto from "./pages/Produto";
+
+const isLogged = true;
+
+const PrivateRoute = ({ children, ...rest }) => {
+  return (
+    <Route {...rest}>{isLogged ? children : <Redirect to="/login" />} </Route>
+  );
+};
 
 function App() {
   return (
@@ -38,6 +47,14 @@ function App() {
             <li>
               <Link to="/quem-somos">Quem Somos - [redirecionamento]</Link>
             </li>
+
+            <li>
+              <Link to="/cadastro">Cadastro</Link>
+            </li>
+
+            <li>
+              <Link to="/sobrePrivado">Privado</Link>
+            </li>
           </ul>
         </nav>
       </header>
@@ -46,6 +63,18 @@ function App() {
       <Switch>
         <Route exact path="/">
           <Home />
+        </Route>
+
+        <Route exact path="/cadastro">
+          {isLogged ? <Sobre /> : <Redirect to="/login" />} ;
+        </Route>
+
+        <PrivateRoute path="/sobrePrivado">
+          <Sobre />
+        </PrivateRoute>
+
+        <Route path="/login">
+          <Login />
         </Route>
 
         <Route exact path="/sobre">
